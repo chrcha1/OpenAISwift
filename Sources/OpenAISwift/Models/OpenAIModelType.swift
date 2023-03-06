@@ -30,8 +30,12 @@ public enum OpenAIModelType {
     ///
     /// [GPT-3 Models OpenAI API Docs](https://beta.openai.com/docs/models/gpt-3)
     public enum GPT3: String {
-        
-        /// Most capable GPT-3 model. Can do any task the other models can do, often with higher quality, longer output and better instruction-following. Also supports inserting completions within text.
+        /// Most capable and newly released GPT-3 model. Released March 1, 2023.
+        ///
+        /// > Model Name: gpt-3.5-turbo
+        case turbo = "gpt-3.5-turbo"
+
+        /// Second most capable GPT-3 model. Can do any task the other models can do, often with higher quality, longer output and better instruction-following. Also supports inserting completions within text.
         ///
         /// > Model Name: text-davinci-003
         case davinci = "text-davinci-003"
@@ -58,6 +62,7 @@ public enum OpenAIModelType {
     ///
     ///  >  Limited Beta
     public enum Codex: String {
+        case turbo = "gpt-3.5-turbo"
         /// Most capable Codex model. Particularly good at translating natural language to code. In addition to completing code, also supports inserting completions within code.
         ///
         /// > Model Name: code-davinci-002

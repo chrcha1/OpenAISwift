@@ -21,10 +21,10 @@ extension OpenAISwift {
     /// Send a Completion to the OpenAI API
     /// - Parameters:
     ///   - prompt: The Text Prompt
-    ///   - model: The AI Model to Use. Set to `OpenAIModelType.gpt3(.davinci)` by default which is the most capable model
+    ///   - model: The AI Model to Use. Set to `OpenAIModelType.gpt3(.turbo)` by default which is the most capable model
     ///   - maxTokens: The limit character for the returned response, defaults to 16 as per the API
     ///   - completionHandler: Returns an OpenAI Data Model
-    public func sendCompletion(with prompt: String, model: OpenAIModelType = .gpt3(.davinci), maxTokens: Int = 16, temperature: Double = 1, completionHandler: @escaping (Result<OpenAI, OpenAIError>) -> Void) {
+    public func sendCompletion(with prompt: String, model: OpenAIModelType = .gpt3(.turbo), maxTokens: Int = 16, temperature: Double = 1, completionHandler: @escaping (Result<OpenAI, OpenAIError>) -> Void) {
         let endpoint = Endpoint.completions
         let body = Command(prompt: prompt, model: model.modelName, maxTokens: maxTokens, temperature: temperature)
         let request = prepareRequest(endpoint, body: body)
@@ -47,10 +47,10 @@ extension OpenAISwift {
     /// Send a Edit request to the OpenAI API
     /// - Parameters:
     ///   - instruction: The Instruction For Example: "Fix the spelling mistake"
-    ///   - model: The Model to use, the only support model is `text-davinci-edit-001`
+    ///   - model: The Model to use, the only support model is `gpt-3.5-turbo`
     ///   - input: The Input For Example "My nam is Adam"
     ///   - completionHandler: Returns an OpenAI Data Model
-    public func sendEdits(with instruction: String, model: OpenAIModelType = .feature(.davinci), input: String = "", completionHandler: @escaping (Result<OpenAI, OpenAIError>) -> Void) {
+    public func sendEdits(with instruction: String, model: OpenAIModelType = .feature(.turbo), input: String = "", completionHandler: @escaping (Result<OpenAI, OpenAIError>) -> Void) {
         let endpoint = Endpoint.edits
         let body = Instruction(instruction: instruction, model: model.modelName, input: input)
         let request = prepareRequest(endpoint, body: body)
@@ -108,13 +108,13 @@ extension OpenAISwift {
     /// Send a Completion to the OpenAI API
     /// - Parameters:
     ///   - prompt: The Text Prompt
-    ///   - model: The AI Model to Use. Set to `OpenAIModelType.gpt3(.davinci)` by default which is the most capable model
+    ///   - model: The AI Model to Use. Set to `OpenAIModelType.gpt3(.turbo)` by default which is the most capable model
     ///   - maxTokens: The limit character for the returned response, defaults to 16 as per the API
     ///   - temperature: Higher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic. Defaults to 1
     /// - Returns: Returns an OpenAI Data Model
     @available(swift 5.5)
     @available(macOS 10.15, iOS 13, watchOS 6, tvOS 13, *)
-    public func sendCompletion(with prompt: String, model: OpenAIModelType = .gpt3(.davinci), maxTokens: Int = 16, temperature: Double = 1) async throws -> OpenAI {
+    public func sendCompletion(with prompt: String, model: OpenAIModelType = .gpt3(.turbo), maxTokens: Int = 16, temperature: Double = 1) async throws -> OpenAI {
         return try await withCheckedThrowingContinuation { continuation in
             sendCompletion(with: prompt, model: model, maxTokens: maxTokens, temperature: temperature) { result in
                 continuation.resume(with: result)
@@ -125,12 +125,12 @@ extension OpenAISwift {
     /// Send a Edit request to the OpenAI API
     /// - Parameters:
     ///   - instruction: The Instruction For Example: "Fix the spelling mistake"
-    ///   - model: The Model to use, the only support model is `text-davinci-edit-001`
+    ///   - model: The Model to use, the only support model is `gpt-3.5-turbo`
     ///   - input: The Input For Example "My nam is Adam"
     ///   - completionHandler: Returns an OpenAI Data Model
     @available(swift 5.5)
     @available(macOS 10.15, iOS 13, watchOS 6, tvOS 13, *)
-    public func sendEdits(with instruction: String, model: OpenAIModelType = .feature(.davinci), input: String = "", completionHandler: @escaping (Result<OpenAI, OpenAIError>) -> Void) async throws -> OpenAI {
+    public func sendEdits(with instruction: String, model: OpenAIModelType = .feature(.turbo), input: String = "", completionHandler: @escaping (Result<OpenAI, OpenAIError>) -> Void) async throws -> OpenAI {
         return try await withCheckedThrowingContinuation { continuation in
             sendEdits(with: instruction, model: model, input: input) { result in
                 continuation.resume(with: result)
